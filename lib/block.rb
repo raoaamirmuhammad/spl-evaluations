@@ -152,7 +152,22 @@ class Block
   # Return the result of subtracting the other Block (or Blocks) from self.
 
   def subtract (other)
-    covers?(other) ? [Block.new(top, other.top), Block.new(bottom, other.bottom)] : []
+    # puts '++++++++++++++++++++++++++++++'
+    # puts covers?(other)
+    # puts self.inspect
+    # puts other.inspect
+    # puts '++++++++++++++++++++++++++++++'
+    surrounds?(other) ? [Block.new(top, other.top), Block.new(bottom, other.bottom)] : aorigin(other)
+    # puts '+++++++++++++++++++++++'
+    # puts include?(other.top)
+    # puts '+++++++++++++++++++++++'
+    # [Block.new(other.bottom, bottom)] if include?(other)
+  end
+
+  # when other encompasses self's origin in subtraction
+
+  def aorigin (other)
+    include?(other.top) ? [Block.new(other.bottom, bottom)] : []
   end
 
   alias :- :subtract
