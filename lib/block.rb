@@ -222,6 +222,7 @@ class Block
   end
 
   def merge (others)
-    # Implement.
+    others.push(self)
+    Block.merge(others)
   end
 end
