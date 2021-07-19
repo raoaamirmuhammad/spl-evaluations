@@ -152,7 +152,7 @@ class Block
   # Return the result of subtracting the other Block (or Blocks) from self.
 
   def subtract (other)
-    [Block.new(top, other.top), Block.new(bottom, other.bottom)]
+    covers?(other) ? [Block.new(top, other.top), Block.new(bottom, other.bottom)] : []
   end
 
   alias :- :subtract
