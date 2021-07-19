@@ -114,9 +114,9 @@ describe Block do
       let(:b)   { Block.new(90, 110) }
 
       it "returns one block" do
-        puts '+++++++here start+++++++++'
-        puts result.inspect
-        puts '+++++++here end+++++++++'
+        # puts '+++++++here start+++++++++'
+        # puts result.inspect
+        # puts '+++++++here end+++++++++'
         result.length.should eq(1)
       end
 
