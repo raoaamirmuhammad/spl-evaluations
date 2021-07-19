@@ -168,6 +168,22 @@ class Block
   # Return the result of subtracting the other Block (or Blocks) from self.
 
   def subtract (other)
+    puts '-----------------'
+    puts other.class
+    # puts other.map{ |block| subtract_block(block) }
+    # other.map{ |block| subtract_block(block) }.flatten
+    # puts 'Inside subtract'
+    if other.is_a? Block
+      subtract_block(other)
+    else
+      other.map{ |block| subtract_block(block) }.flatten
+    end
+  end
+
+  def subtract_block (other)
+    puts '------------'
+    puts other
+    puts 'Inside subtract_block'
     case true
     when surrounds?(other)
       puts 'surrounds others'
@@ -184,6 +200,7 @@ class Block
     #   puts 'coverd chared beginging or ending'
     #   []
     else
+      puts 'Inside else'
       []
     end
   end
