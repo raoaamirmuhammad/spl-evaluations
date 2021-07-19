@@ -48,18 +48,8 @@ class Block
   # ==============
 
   def == (other)
-    # puts '++++++++++Inside eq method++++++++++++++'
-    # puts self.class
-    # puts other.class
-    # puts self.is_a? Array
-    # puts other.is_a? Array
-    # puts '++++++++++Inside eq ending++++++++++++++'
     block1 = self.is_a?(Array )? self.first : self
     block2 = other.is_a?(Array) ? other.first : other
-    # puts '++++++++++Inside eq method++++++++++++++'
-    # puts block1.class
-    # puts block2.class
-    # puts '++++++++++Inside eq ending++++++++++++++'
     block1.top == block2.top && block1.bottom == block2.bottom
   end
 
@@ -168,11 +158,6 @@ class Block
   # Return the result of subtracting the other Block (or Blocks) from self.
 
   def subtract (other)
-    puts '-----------------'
-    puts other.class
-    # puts other.map{ |block| subtract_block(block) }
-    # other.map{ |block| subtract_block(block) }.flatten
-    # puts 'Inside subtract'
     if other.is_a? Block
       subtract_block(other)
     else
@@ -181,18 +166,12 @@ class Block
   end
 
   def subtract_block (other)
-    puts '------------'
-    puts other
-    puts 'Inside subtract_block'
     case true
     when surrounds?(other)
-      puts 'surrounds others'
       [Block.new(top, other.top), Block.new(bottom, other.bottom)]
     when encompassed_top?(other)
-      puts 'encompassed_top'
       [Block.new(other.bottom, bottom)]
     when encompassed_bottom?(other)
-      puts 'encompassed_bottom'
       [Block.new(other.top, top)]
     when !overlaps?(other)
       [self]
@@ -200,7 +179,6 @@ class Block
     #   puts 'coverd chared beginging or ending'
     #   []
     else
-      puts 'Inside else'
       []
     end
   end

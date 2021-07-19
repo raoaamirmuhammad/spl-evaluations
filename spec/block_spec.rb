@@ -86,16 +86,6 @@ describe Block do
       let(:b)    { Block.new(110, 190) }
 
       it "returns a" do
-        # puts '+++++++++start++++++++'
-        # puts result.inspect
-        # puts '*********************'
-        # puts a
-        # puts [a]
-        # puts '********eq********'
-        # # puts result == [a]
-        # puts result.class
-        # puts result.top == a.top
-        # puts '------end--------'
         result.should eq([a])
       end
     end
@@ -114,9 +104,6 @@ describe Block do
       let(:b)   { Block.new(90, 110) }
 
       it "returns one block" do
-        # puts '+++++++here start+++++++++'
-        # puts result.inspect
-        # puts '+++++++here end+++++++++'
         result.length.should eq(1)
       end
 
