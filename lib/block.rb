@@ -51,9 +51,15 @@ class Block
     # puts '++++++++++Inside eq method++++++++++++++'
     # puts self.class
     # puts other.class
+    # puts self.is_a? Array
+    # puts other.is_a? Array
     # puts '++++++++++Inside eq ending++++++++++++++'
-    block2 = block2.first if block2.is_a? Array
-    block1 = self.first if self.is_a? Array
+    block1 = self.is_a?(Array )? self.first : self
+    block2 = other.is_a?(Array) ? other.first : other
+    # puts '++++++++++Inside eq method++++++++++++++'
+    # puts block1.class
+    # puts block2.class
+    # puts '++++++++++Inside eq ending++++++++++++++'
     block1.top == block2.top && block1.bottom == block2.bottom
   end
 
