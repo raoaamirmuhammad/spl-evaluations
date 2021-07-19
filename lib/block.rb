@@ -178,11 +178,12 @@ class Block
     when encompassed_bottom?(other)
       puts 'encompassed_bottom'
       [Block.new(other.top, top)]
+    when !overlaps?(other)
+      [self]
     # when covered_shared_begining?(other) || covered_shared_ending?(other)
     #   puts 'coverd chared beginging or ending'
     #   []
     else
-      puts 'Inside else block'
       []
     end
   end
