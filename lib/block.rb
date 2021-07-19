@@ -97,6 +97,22 @@ class Block
     bottom >= other.bottom && other.include?(top)
   end
 
+  def encompassed_top? (other)
+    top == other.top && other.bottom > top && other.bottom < bottom
+  end
+
+  def encompassed_bottom? (other)
+    bottom == other.bottom && other.top > top
+  end
+
+  def covered_shared_begining? (other)
+    other.covers?(self) && other.start == start
+  end
+
+  def covered_shared_ending? (other)
+    other.covers?(self) && other.bottom == bottom
+  end
+
   # This block overlaps with any part of the other block.
 
   def overlaps? (other)
@@ -152,24 +168,23 @@ class Block
   # Return the result of subtracting the other Block (or Blocks) from self.
 
   def subtract (other)
-    # puts '++++++++++++++++++++++++++++++'
-    # puts covers?(other)
-    # puts self.inspect
-    # puts other.inspect
-    # puts '++++++++++++++++++++++++++++++'
-    surrounds?(other) ? [Block.new(top, other.top), Block.new(bottom, other.bottom)] : covers_a_with_shared_bigining(other)
-    # puts '+++++++++++++++++++++++'
-    # puts include?(other.top)
-    # puts '+++++++++++++++++++++++'
-    # [Block.new(other.bottom, bottom)] if include?(other)
-  end
-
-  def covers_a_with_shared_bigining (other)
-    other.covers?(self) && other.start == start ? [] : encompasses_a_origin(other)
-  end
-
-  def encompasses_a_origin (other)
-    include?(other.top) ? [Block.new(other.bottom, bottom)] : []
+    case true
+    when surrounds?(other)
+      puts 'surrounds others'
+      [Block.new(top, other.top), Block.new(bottom, other.bottom)]
+    when encompassed_top?(other)
+      puts 'encompassed_top'
+      [Block.new(other.bottom, bottom)]
+    when encompassed_bottom?(other)
+      puts 'encompassed_bottom'
+      [Block.new(other.top, top)]
+    # when covered_shared_begining?(other) || covered_shared_ending?(other)
+    #   puts 'coverd chared beginging or ending'
+    #   []
+    else
+      puts 'Inside else block'
+      []
+    end
   end
 
   alias :- :subtract
