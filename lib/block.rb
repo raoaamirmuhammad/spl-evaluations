@@ -48,12 +48,13 @@ class Block
   # ==============
 
   def == (other)
-    puts '++++++++++Inside eq method++++++++++++++'
-    puts self.class
-    puts other.class
-    puts '++++++++++Inside eq ending++++++++++++++'
-    other = other.pop if other.is_a? Array
-    top == other.top && bottom == other.bottom
+    # puts '++++++++++Inside eq method++++++++++++++'
+    # puts self.class
+    # puts other.class
+    # puts '++++++++++Inside eq ending++++++++++++++'
+    block2 = block2.first if block2.is_a? Array
+    block1 = self.first if self.is_a? Array
+    block1.top == block2.top && block1.bottom == block2.bottom
   end
 
   def <=> (other)
@@ -139,7 +140,7 @@ class Block
   # Return the result of adding the other Block (or Blocks) to self.
 
   def add (other)
-    Block.new([top, other.top].min, [bottom, other.bottom].max)
+    [Block.new([top, other.top].min, [bottom, other.bottom].max)]
   end
   
   # Return the result of subtracting the other Block (or Blocks) from self.
