@@ -157,16 +157,18 @@ class Block
     # puts self.inspect
     # puts other.inspect
     # puts '++++++++++++++++++++++++++++++'
-    surrounds?(other) ? [Block.new(top, other.top), Block.new(bottom, other.bottom)] : aorigin(other)
+    surrounds?(other) ? [Block.new(top, other.top), Block.new(bottom, other.bottom)] : covers_a_with_shared_bigining(other)
     # puts '+++++++++++++++++++++++'
     # puts include?(other.top)
     # puts '+++++++++++++++++++++++'
     # [Block.new(other.bottom, bottom)] if include?(other)
   end
 
-  # when other encompasses self's origin in subtraction
+  def covers_a_with_shared_bigining (other)
+    other.covers?(self) && other.start == start ? [] : encompasses_a_origin(other)
+  end
 
-  def aorigin (other)
+  def encompasses_a_origin (other)
     include?(other.top) ? [Block.new(other.bottom, bottom)] : []
   end
 
